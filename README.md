@@ -1,4 +1,4 @@
-# Jogo da cobrinha
+# Jogo da cobrinha 🐍
 Jogo será construido durante um modulo do Bootcamp da DIO(Digital Innovation One)
 
 Jogo será construido em HTML5, Css3 e Javascript.
