@@ -22,7 +22,7 @@ let food = {
 
 //função para criar o fundo do jogo
 function criarBG() {
-   context.fillStyle = "orange";//definindo a cor de fundo do jogo
+    context.fillStyle = "#EEE9E9";//definindo a cor de fundo do jogo
     context.fillRect(0, 0, 16 * box, 16 * box);//definindo o tamanho do desenho 16*32=512->tamanho definido do canvas.
 ;}
 
@@ -67,10 +67,10 @@ function iniciarJogo() {
     drawFood();
 
 
-    if(snake[0].x > 15 *box && direction == "right") snake[0].x = 0;
-    if(snake[0].x < 0  && direction == "left") snake[0].x = 16 * box;
-    if(snake[0].y > 15* box && direction == "down") snake[0].y = 0;
-    if(snake[0].y < 0  && direction == "up") snake[0].y = 16 * box;
+    if (snake[0].x > 16 * box && direction == "right") {clearInterval(jogo); alert("Game Over :)");} 
+    if (snake[0].x < 0 && direction == "left") {clearInterval(jogo); alert("Game Over :)");}
+    if (snake[0].y > 16 * box && direction == "down") {clearInterval(jogo); alert("Game Over :)");}
+    if (snake[0].y < 0 && direction == "up"){clearInterval(jogo); alert("Game Over :)");}
 
     for(i=1; i < snake.length; i++ ){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
@@ -104,12 +104,13 @@ function iniciarJogo() {
         x: snakeX,
         y: snakeY
     }
-    var htmlPontuacao = `<h1>Pontuação: ${pontuacao}</h1>`;
-    document.getElementById("score-player").innerHTML = htmlPontuacao;
+    
     snake.unshift(newHead);
+    var resultado = `<h2>SCORE: <span style="color: red">${pontuacao}</span></h2>`;
+    document.getElementById("pontuacao").innerHTML = resultado;
 
    
 }
-
-let jogo = setInterval(iniciarJogo, 100);
+var level = 50;
+let jogo = setInterval(iniciarJogo, level);
 

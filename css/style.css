@@ -1,15 +1,23 @@
-body {
-
-    height: 95vh;
-    width: 95;
+body{
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    font-family:  cursive;
+    justify-content: center;
+    font-family: Andale Mono, monospace;
+}
+#canvas{
+    border: gray solid 1px;
+    width: 513px;
+    height: 513px;
 }
 
+#info-player{
+    border: gray solid 1px;
+    width: 300px;
+    height: 513px;
+    text-align: center;
 
+    
+}
 
 
 
