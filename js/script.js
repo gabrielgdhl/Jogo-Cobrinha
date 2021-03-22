@@ -5,6 +5,7 @@ let context = canvas.getContext("2d");//declarando o formato 2d para o canvas
 let box = 32;//tamanho de cada bloco da cobrinha que equivale a 16 veses o tamanho do canvas
 let snake = [];//variavel tipo array para ser preenhido por background
 let direction = " ";//declaração da variável direction
+var pontuacao = 0;
 
 
 //definindo onde o jogo vai criar a cobrinha onde X e Y e quivalem as colunas e linhas
@@ -29,31 +30,47 @@ function criarBG() {
 function criarCobrinha() {
     for(i=0; i<snake.length; i++){//a cobrinha vai ser criado em um ciclo infinito de vezes, lenght representa a posição do array
         context.fillStyle = "green";//definindo a cor da cobrinha
-        context.fillRect(snake[i].x, snake[i].y, box, box);// (.x , .y)->define o local onde vai ser criado, (box, box)->define o tamnho da cobrinha
+       // context.fillRect(snake[i].x, snake[i].y, box, box);// (.x , .y)->define o local onde vai ser criado, (box, box)->define o tamnho da cobrinha
+       context.beginPath(); 
+       context.ellipse(snake[i].x, snake[i].y, 16, 16, Math.PI * .25, -2 , Math.PI * 1.5);
+       context.fill();
     }
 }
 
 function drawFood() {
     context.fillStyle = "purple";
-    context.fillRect(food.x, food.y, box, box);    
+    //context.fillRect(food.x, food.y, box, box); //comida quadrada   
+    context.beginPath();
+    context.ellipse(food.x, food.y, 16, 16, Math.PI * .25, -2, Math.PI * 1.5);
+    context.fill();
 }
 
 document.addEventListener('keydown', update);
 
 function update(event) {
-    if(event.keyCode == 37 && direction != "right") direction = "left";
-    if(event.keyCode == 38 && direction != "down") direction = "up";
-    if(event.keyCode == 39 && direction != "left") direction = "right";
-    if(event.keyCode == 40 && direction != "up") direction = "down";
+
+    if(event.keyCode == 37 && direction != "right") setInterval(direction = "left", 110)
+    if(event.keyCode == 38 && direction != "down") setInterval(direction = "up", 110)
+    if(event.keyCode == 39 && direction != "left") setInterval(direction = "right", 110)
+    if(event.keyCode == 40 && direction != "up") setInterval(direction = "down", 110)
 }
+
+
+
 
 
 function iniciarJogo() {
 
+    
+    criarBG(); //chamando as função que cria o Background
+    criarCobrinha();//criando a cobrinha
+    drawFood();
+
+
     if(snake[0].x > 15 *box && direction == "right") snake[0].x = 0;
-    if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
-    if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
-    if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * box;
+    if(snake[0].x < 0  && direction == "left") snake[0].x = 16 * box;
+    if(snake[0].y > 15* box && direction == "down") snake[0].y = 0;
+    if(snake[0].y < 0  && direction == "up") snake[0].y = 16 * box;
 
     for(i=1; i < snake.length; i++ ){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
@@ -63,9 +80,7 @@ function iniciarJogo() {
 
     }
 
-    criarBG(); //chamando as função que cria o Background
-    criarCobrinha();//criando a cobrinha
-    drawFood();
+    
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
@@ -80,17 +95,21 @@ function iniciarJogo() {
     }else{
         food.x = Math.floor(Math.random() * 15 +1) * box;
         food.y = Math.floor(Math.random() * 15 +1) * box;
+        
+        pontuacao++;
+        
     }
 
     let newHead = {
         x: snakeX,
         y: snakeY
     }
-
+    var htmlPontuacao = `<h1>Pontuação: ${pontuacao}</h1>`;
+    document.getElementById("score-player").innerHTML = htmlPontuacao;
     snake.unshift(newHead);
+
    
 }
 
 let jogo = setInterval(iniciarJogo, 100);
-
 
