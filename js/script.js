@@ -67,10 +67,10 @@ function iniciarJogo() {
     drawFood();
 
 
-    if (snake[0].x > 16 * box && direction == "right") {clearInterval(jogo); alert("Game Over :)");} 
-    if (snake[0].x < 0 && direction == "left") {clearInterval(jogo); alert("Game Over :)");}
-    if (snake[0].y > 16 * box && direction == "down") {clearInterval(jogo); alert("Game Over :)");}
-    if (snake[0].y < 0 && direction == "up"){clearInterval(jogo); alert("Game Over :)");}
+    if (snake[0].x > 16 * box) {clearInterval(jogo); alert("Game Over :)");} 
+    if (snake[0].x < 0 ) {clearInterval(jogo); alert("Game Over :)");}
+    if (snake[0].y > 16 * box) {clearInterval(jogo); alert("Game Over :)");}
+    if (snake[0].y < 0 ){clearInterval(jogo); alert("Game Over :)");}
 
     for(i=1; i < snake.length; i++ ){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
@@ -111,6 +111,6 @@ function iniciarJogo() {
 
    
 }
-var level = 50;
+var level = 80;
 let jogo = setInterval(iniciarJogo, level);
 
