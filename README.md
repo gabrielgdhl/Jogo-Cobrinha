@@ -1,6 +1,6 @@
 # Jogo-cobrinha 🐍 :video_game: - _Javascript_
 
-<p align="center>
+<p align="center">
     <img width="470" src="/img/assets/snake-game.png">
 </p>
 
